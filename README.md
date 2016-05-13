@@ -25,62 +25,96 @@ In your project's Gruntfile, add a section named `requirejs_dir` to the data obj
 ```js
 grunt.initConfig({
   requirejs_dir: {
-    options: {
-      // Task-specific options go here.
+    build: {
+      options: {},
+      src: 'controllers/examplePage/**/*.js', // Source Files/File
+      dest: 'controllers/all.js' // This file also has to exist
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
+  }
 });
 ```
 
-### Options
+### How it works?
+The destination file has to exist. The Default format of a file is like:
+```js
+define([
+  'SampleModule1',
+  //- REQUIRE_DIR_START
+  
+  // <-- These two markers tell where to include the files.
+  
+  //- REQUIRE_DIR_END
+], function(SampleModule1) {
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+  ...
+  // My Random Code
+  ...
+  ...
+  ...
+});
+```
 
-A string value that is used to do something with whatever.
+End Result:
+```js
+define([
+  'SampleModule1',
+  //- REQUIRE_DIR_START
+  'src/defines/sample1.js',
+  'src/defines/sample2.js',
+  'src/defines/sample3.js'
+  //- REQUIRE_DIR_END
+], function(SampleModule1) {
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+  ...
+  // My Random Code
+  ...
+  ...
+  ...
+});
 
-A string value that is used to do something else with whatever else.
+```
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+There are no default options. All you need is Source and Destination. Both Source and Destination have to exist.
 
 ```js
 grunt.initConfig({
   requirejs_dir: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+    build: {
+      src: 'playground/defines/**/*.js',
+      dest: 'tmp/default.js'
+    }
+  }
 });
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### Options
 
-```js
-grunt.initConfig({
-  requirejs_dir: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
+#### options.quot
+Type: `String`
+Default value: `'`
+
+Quote mark to be used when requiring the files.
+
+#### options.endComma
+Type: `Boolean`
+Default value: `false`
+
+To indicate if a terminating comma is needed. Use it in the case when the Required Files are inserted in the middle.
+
+#### options.startDelimiter
+Type: `String`
+Default value: `//- REQUIRE_DIR_START`
+
+Custom Start Flag
+
+#### options.endDelimiter
+Type: `String`
+Default value: `//- REQUIRE_DIR_END`
+
+Custom End Flag
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

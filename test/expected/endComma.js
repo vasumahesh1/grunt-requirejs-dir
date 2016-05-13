@@ -6,7 +6,7 @@ define([
   'playground/defines/sample3.js',
   //- REQUIRE_DIR_END
   'SampleModule2'
-], function(TestUtils) {
+], function(SampleModule1) {
 
   // My Random Code
 });

@@ -2,7 +2,7 @@ define([
   'SampleModule1',
   //- CUSTOM_DELIM_START
   //- CUSTOM_DELIM_END
-], function(TestUtils) {
+], function(SampleModule1) {
 
   // My Random Code
 });
