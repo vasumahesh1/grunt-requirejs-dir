@@ -1,5 +1,7 @@
 # grunt-requirejs-dir
 
+[![Build Status](https://travis-ci.org/vasumahesh1/grunt-requirejs-dir.svg?branch=master)](https://travis-ci.org/vasumahesh1/grunt-requirejs-dir)
+
 > Create define blocks for Require JS from a directory containing files.
 
 ## Getting Started
