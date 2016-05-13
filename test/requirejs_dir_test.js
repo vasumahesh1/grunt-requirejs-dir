@@ -31,6 +31,10 @@ exports.requirejs_dir = {
 
     var actual = grunt.file.read('tmp/default.js');
     var expected = grunt.file.read('test/expected/default.js');
+
+    actual = actual.replace(/\r\n/g, '\n');
+    expected = expected.replace(/\r\n/g, '\n');
+
     test.equal(actual, expected, 'should work with default options.');
 
     test.done();
@@ -40,6 +44,9 @@ exports.requirejs_dir = {
 
     var actual = grunt.file.read('tmp/endComma.js');
     var expected = grunt.file.read('test/expected/endComma.js');
+    actual = actual.replace(/\r\n/g, '\n');
+    expected = expected.replace(/\r\n/g, '\n');
+
     test.equal(actual, expected, 'should work with endComma option.');
 
     test.done();
@@ -49,6 +56,10 @@ exports.requirejs_dir = {
 
     var actual = grunt.file.read('tmp/quot.js');
     var expected = grunt.file.read('test/expected/quot.js');
+
+    actual = actual.replace(/\r\n/g, '\n');
+    expected = expected.replace(/\r\n/g, '\n');
+
     test.equal(actual, expected, 'should work with quot option.');
 
     test.done();
@@ -58,6 +69,10 @@ exports.requirejs_dir = {
 
     var actual = grunt.file.read('tmp/delims.js');
     var expected = grunt.file.read('test/expected/delims.js');
+
+    actual = actual.replace(/\r\n/g, '\n');
+    expected = expected.replace(/\r\n/g, '\n');
+
     test.equal(actual, expected, 'should work with delims option.');
 
     test.done();
