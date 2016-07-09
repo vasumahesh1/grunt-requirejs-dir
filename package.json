@@ -1,7 +1,7 @@
 {
   "name": "grunt-requirejs-dir",
   "description": "Create define blocks for Require JS from a directory containing files.",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "homepage": "https://github.com/vasumahesh1/grunt-requirejs-dir",
   "author": {
     "name": "Vasu Mahesh",
