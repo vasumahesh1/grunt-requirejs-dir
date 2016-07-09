@@ -52,10 +52,7 @@ module.exports = function(grunt) {
       source = [source];
     }
 
-    var opts = {};
-    opts.cwd = taskData.cwd || './';
-
-    var files = grunt.file.expandMapping(source, '', opts);
+    var files = grunt.file.expand(source);
 
     var destinationCode = grunt.file.read(dest);
 
@@ -80,7 +77,7 @@ module.exports = function(grunt) {
     var upperCode = destinationCode.substring(0, startPos);
     var lowerCode = destinationCode.substring(endIndex);
 
-    var modules = _joinModulesToString(files, '', options);
+    var modules = _joinModulesToString(files, '', dest, options);
 
     var newCode = upperCode + options.eol + modules + options.eol + options.tab + lowerCode;
 
@@ -90,11 +87,18 @@ module.exports = function(grunt) {
 };
 
 
-function _joinModulesToString(modules, string, options) {
+function _joinModulesToString(modules, string, dest, options) {
   for (var idx = 0; idx < modules.length; idx++) {
-    var module = modules[idx].dest;
+    var module = modules[idx];
 
-    string += options.tab + options.quot + module + options.quot;
+    var relative = path.posix.relative(path.posix.dirname(dest), module);
+    var finalPath = path.posix.join('./', relative)
+
+    if (!finalPath.startsWith('.')) {
+      finalPath = './' + finalPath;      
+    }
+
+    string += options.tab + options.quot + finalPath + options.quot;
 
     if (idx !== modules.length - 1) {
       string += ',' + options.eol;

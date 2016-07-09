@@ -70,6 +70,25 @@ module.exports = function(grunt) {
       }
     },
 
+    release: {
+      options: {
+        changelog: false,
+        add: true,
+        commit: true,
+        tag: false,
+        push: false,
+        pushTags: false,
+        npm: true,
+        npmtag: false,
+        indentation: '\t',
+        beforeBump: [],
+        afterBump: [],
+        beforeRelease: [],
+        afterRelease: [],
+        updateVars: []
+      }
+    },
+
     // Unit tests.
     nodeunit: {
       tests: ['test/*_test.js']
@@ -84,6 +103,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
+  grunt.loadNpmTasks('grunt-release');
 
   grunt.registerTask('test', ['clean', 'copy:tests', 'requirejs_dir', 'nodeunit']);
 
