@@ -52,7 +52,10 @@ module.exports = function(grunt) {
       source = [source];
     }
 
-    var files = grunt.file.expand(source);
+    var opts = {};
+    opts.cwd = taskData.cwd || './';
+
+    var files = grunt.file.expandMapping(source, '', opts);
 
     var destinationCode = grunt.file.read(dest);
 
@@ -89,7 +92,7 @@ module.exports = function(grunt) {
 
 function _joinModulesToString(modules, string, options) {
   for (var idx = 0; idx < modules.length; idx++) {
-    var module = modules[idx];
+    var module = modules[idx].dest;
 
     string += options.tab + options.quot + module + options.quot;
 
